@@ -1,14 +1,21 @@
-var element = document.getElementById('container')
+var audioCtx = new webkitAudioContext()
 
 window.onload = function() {
-  dropAndLoad(window.element, init)
+  var element = document.getElementById('container')
+  dropAndLoad(element, init, "ArrayBuffer")
 }
 
-function init(dataUrl) {
-
+function init(arrayBuffer) {
+  audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
+    var source = audioCtx.createBufferSource()   
+    source.buffer = buffer
+    source.connect(audioCtx.destination)
+    source.noteOn(0)
+  })
 }
 
-function dropAndLoad(dropElement, callback) {
+function dropAndLoad(dropElement, callback, readFormat) {
+  var readFormat = readFormat || "DataUrl"
 
   dropElement.addEventListener('dragover', function(e) {
     e.stopPropagation()
@@ -28,6 +35,6 @@ function dropAndLoad(dropElement, callback) {
     reader.onload = function(e) {
       callback(e.target.result)
     }
-    reader.readAsDataURL(file)
+    reader['readAs'+readFormat](file)
   }
 }

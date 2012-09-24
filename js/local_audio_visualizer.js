@@ -1,4 +1,5 @@
 var audioCtx = new webkitAudioContext()
+var analyser = audioCtx.createAnalyser()
 
 window.onload = function() {
   var element = document.getElementById('container')
@@ -9,9 +10,25 @@ function init(arrayBuffer) {
   audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
     var source = audioCtx.createBufferSource()   
     source.buffer = buffer
-    source.connect(audioCtx.destination)
+    source.connect(analyser)
+    analyser.connect(audioCtx.destination)
     source.noteOn(0)
+    new visualizer()
   })
+}
+
+function visualizer(visualization) {
+  var self = this
+  this.visualization = visualization  
+  var time = Date.now()
+  var loop = function() {
+    var dt = Date.now() - last
+    var byteFreq = new Uint8Array(analyser.frequencyBinCount)
+    analyser.getByteFrequencyData(byteFreq)
+    self.visualization(byteFreq, dt)
+    webkitRequestAnimationFrame(loop)
+  }
+  webkitRequestAnimationFrame(loop)
 }
 
 function dropAndLoad(dropElement, callback, readFormat) {

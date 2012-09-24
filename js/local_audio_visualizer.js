@@ -1,5 +1,3 @@
-var audioCtx = new webkitAudioContext()
-var analyser = audioCtx.createAnalyser()
 
 window.onload = function() {
   var element = document.getElementById('container')
@@ -7,8 +5,12 @@ window.onload = function() {
 }
 
 function init(arrayBuffer) {
+  window.audioCtx = new webkitAudioContext()
+  window.analyser = audioCtx.createAnalyser()
+  if (window.source)
+    source.noteOff(0)
   audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
-    var source = audioCtx.createBufferSource()   
+    window.source = audioCtx.createBufferSource()   
     source.buffer = buffer
     source.connect(analyser)
     analyser.connect(audioCtx.destination)

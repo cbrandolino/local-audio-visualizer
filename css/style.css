@@ -1,3 +1,38 @@
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Droid Sans'), url('http://playground.html5rocks.com/samples/html5_misc/Droid_Sans.ttf') format('truetype');
+}
+
+#instructions {
+  display: block;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  margin-top: -50px;
+  font-family: 'Droid Sans';
+  color: #fff;
+}
+
+#bottom-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  height: 160px;
+  font-family: 'Droid Sans'; 
+  color: #fff;  
+}
+
+#info {
+  float: left;
+}
+
+#info a {
+  color: #ddd;
+}
+
 #container {
   display: block;
   position: absolute;

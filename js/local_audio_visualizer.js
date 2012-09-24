@@ -5,6 +5,7 @@ window.onload = function() {
 }
 
 function init(arrayBuffer) {
+  document.getElementById('instructions').innerHTML = 'Loading ...'
   window.audioCtx = new webkitAudioContext()
   window.analyser = audioCtx.createAnalyser()
   if (window.source)
@@ -17,6 +18,7 @@ function init(arrayBuffer) {
     source.noteOn(0)
     var viz = new simpleViz()
     new visualizer(viz['update'])
+    document.getElementById('instructions').innerHTML = ''
   })
 }
 

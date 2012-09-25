@@ -6,13 +6,7 @@ Drag an audio file to the browser window. It will be played directly from your h
 
 Here is [the demo](http://cbrandolino.github.com/local-audio-visualizer)
 
-## Status
-
-At the moment, there's just enough to make it work.
-
-I will add more comments, a better css and some tutorial-ish documentation as soon as I get some sleep.
-
-It works well on the latest Chrome; possibly on Safari too.
+Here is the docco-generated [documentation, which makes for a decent tutorial](http://cbrandolino.github.com/local-audio-visualizer/docs/local_audio_visualizer)
 
 ## HTML5 features showcased
 

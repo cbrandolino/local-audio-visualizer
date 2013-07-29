@@ -1,3 +1,9 @@
+(function() {
+  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.requestAnimationFrame = requestAnimationFrame;
+})();
+
 window.onload = function() {
   var element = document.getElementById('container')
   dropAndLoad(element, init, "ArrayBuffer")
@@ -36,7 +42,7 @@ function dropAndLoad(dropElement, callback, readFormat) {
 function init(arrayBuffer) {
   document.getElementById('instructions').innerHTML = 'Loading ...'
   // Create a new `audioContext` and its `analyser`
-  window.audioCtx = new webkitAudioContext()
+  window.audioCtx = new AudioContext()
   window.analyser = audioCtx.createAnalyser()
   // If a sound is still playing, stop it.
   if (window.source)
@@ -51,7 +57,7 @@ function init(arrayBuffer) {
     // and back to the destination, to play the sound after the analysis.
     analyser.connect(audioCtx.destination)
     // Start playing the buffer.
-    source.noteOn(0)
+    source.start(0)
     // Initialize a visualizer object
     var viz = new simpleViz()
     // Finally, initialize the visualizer.
@@ -76,9 +82,9 @@ function visualizer(visualization, analyser) {
     last = Date.now()
     // We might want to use a delta time (`dt`) too for our visualization.
     self.visualization(byteFreq, dt)
-    webkitRequestAnimationFrame(loop)
+    requestAnimationFrame(loop)
   }
-  webkitRequestAnimationFrame(loop)
+  requestAnimationFrame(loop)
 }
 
 // A simple visualization. Its update function illustrates how to use 

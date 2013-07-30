@@ -40,9 +40,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: -webkit-radial-gradient(
-    center, 
-    ellipse cover, 
+  background: radial-gradient( 
+    ellipse farthest-corner, 
     #7d7d7d 0%,
     #0e0e0e 100%);
 }
